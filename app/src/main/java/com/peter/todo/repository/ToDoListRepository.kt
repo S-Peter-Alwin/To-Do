@@ -1,16 +1,15 @@
-package com.peter.todo
+package com.peter.todo.repository
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
 import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LiveData
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.peter.todo.api.ToDoApiService
+import com.peter.todo.db.ToDoEntity
+import com.peter.todo.db.TodoDao
 
-class ToDoListRepository(private val taskApi: ToDoApiService,private val toDoDao: TodoDao,private val context: Context) {
+class ToDoListRepository(private val taskApi: ToDoApiService, private val toDoDao: TodoDao, private val context: Context) {
 
     fun isOnline(context: Context): Boolean {
         val connectivityManager =

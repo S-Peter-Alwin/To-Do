@@ -1,5 +1,6 @@
-package com.peter.todo
+package com.peter.todo.api
 
+import com.peter.todo.db.ToDoEntity
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE

@@ -1,9 +1,11 @@
-package com.peter.todo
+package com.peter.todo.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.peter.todo.repository.ToDoListRepository
+import com.peter.todo.db.ToDoEntity
 import kotlinx.coroutines.launch
  class ToDoListViewModel(private val repository: ToDoListRepository) : ViewModel() {
      private var currentCount = 0

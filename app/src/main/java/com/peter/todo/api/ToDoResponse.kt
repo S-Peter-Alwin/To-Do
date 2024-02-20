@@ -1,4 +1,6 @@
-package com.peter.todo
+package com.peter.todo.api
+
+import com.peter.todo.db.ToDoEntity
 
 data class ToDoResponse(
     val limit: Int,

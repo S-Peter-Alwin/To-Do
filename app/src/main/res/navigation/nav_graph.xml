@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/toDoListFragment"
-        android:name="com.peter.todo.ToDoListFragment"
+        android:name="com.peter.todo.ui.ToDoListFragment"
         android:label="ToDoListFragment">
         <action
             android:id="@+id/action_to_addFragment"
@@ -40,14 +40,14 @@
 
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.peter.todo.AddUpdateFragment"
+        android:name="com.peter.todo.ui.AddUpdateFragment"
         android:label="Add Task"
         >
 
     </fragment>
     <fragment
         android:id="@+id/updateTaskFragment"
-        android:name="com.peter.todo.AddUpdateFragment"
+        android:name="com.peter.todo.ui.AddUpdateFragment"
         android:label="Update Task"
         >
 

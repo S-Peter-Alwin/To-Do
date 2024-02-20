@@ -1,4 +1,4 @@
-package com.peter.todo
+package com.peter.todo.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,13 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.peter.todo.ToDoListFragmentDirections
+import com.peter.todo.repository.ToDoListRepository
+import com.peter.todo.viewmodel.ToDoListViewModel
+import com.peter.todo.repository.ToDoListViewModelFactory
+import com.peter.todo.api.TodoServices
 import com.peter.todo.databinding.FragmentTodoListBinding
+import com.peter.todo.db.AppDatabase
 
 class ToDoListFragment : Fragment()  {
 

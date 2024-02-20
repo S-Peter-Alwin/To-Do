@@ -1,9 +1,10 @@
-package com.peter.todo
+package com.peter.todo.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.peter.todo.databinding.ItemTodoBinding
+import com.peter.todo.db.ToDoEntity
 
 class TodoListAdapter(private val onItemClick: (ToDoEntity) -> Unit): RecyclerView.Adapter<TodoListAdapter.TodoHolder>() {
 

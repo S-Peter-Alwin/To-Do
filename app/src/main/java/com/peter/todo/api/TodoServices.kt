@@ -1,4 +1,4 @@
-package com.peter.todo
+package com.peter.todo.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

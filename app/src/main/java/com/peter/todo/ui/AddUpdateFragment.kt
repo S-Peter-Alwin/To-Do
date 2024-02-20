@@ -1,4 +1,4 @@
-package com.peter.todo
+package com.peter.todo.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -9,7 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.peter.todo.repository.AddUpdateRepository
+import com.peter.todo.viewmodel.AddUpdateViewModel
+import com.peter.todo.repository.AddUpdateViewModelFactory
+import com.peter.todo.api.TodoServices
 import com.peter.todo.databinding.FragmentAddUpdateBinding
+import com.peter.todo.db.AppDatabase
+import com.peter.todo.db.ToDoEntity
 
 class AddUpdateFragment : Fragment() {
 
@@ -27,7 +33,8 @@ class AddUpdateFragment : Fragment() {
         binding = FragmentAddUpdateBinding.inflate(layoutInflater, container, false)
         val toDoDao = AppDatabase.getInstance(requireContext()).todoDao()
         val repository = AddUpdateRepository(TodoServices.taskApiService,toDoDao,requireContext())
-        viewModel = ViewModelProvider(this, AddUpdateViewModelFactory(repository)).get(AddUpdateViewModel::class.java)
+        viewModel = ViewModelProvider(this, AddUpdateViewModelFactory(repository)).get(
+            AddUpdateViewModel::class.java)
         val action = requireArguments().getString("action")
         if (action.equals("Add",true)){
             binding.addUpdate.setText("ADD")

@@ -1,4 +1,4 @@
-package com.peter.todo
+package com.peter.todo.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

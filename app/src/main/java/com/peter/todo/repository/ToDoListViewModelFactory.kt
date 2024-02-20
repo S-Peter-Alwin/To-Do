@@ -1,7 +1,8 @@
-package com.peter.todo
+package com.peter.todo.repository
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.peter.todo.viewmodel.ToDoListViewModel
 
 class ToDoListViewModelFactory(private val repository: ToDoListRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

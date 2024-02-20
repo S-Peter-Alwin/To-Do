@@ -1,14 +1,15 @@
-package com.peter.todo
+package com.peter.todo.repository
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProvider
+import com.peter.todo.api.ToDoApiService
+import com.peter.todo.db.ToDoEntity
+import com.peter.todo.db.TodoDao
 
-class AddUpdateRepository(private val taskApi: ToDoApiService,private val toDoDao: TodoDao,private val context: Context) {
+class AddUpdateRepository(private val taskApi: ToDoApiService, private val toDoDao: TodoDao, private val context: Context) {
 
     fun isOnline(context: Context): Boolean {
         val connectivityManager =

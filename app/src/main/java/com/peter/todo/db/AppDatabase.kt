@@ -1,4 +1,4 @@
-package com.peter.todo
+package com.peter.todo.db
 
 import android.content.Context
 import androidx.room.Database
