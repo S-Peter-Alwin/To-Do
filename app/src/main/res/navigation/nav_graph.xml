@@ -1,0 +1,58 @@
+<!-- nav_graph.xml -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/toDoListFragment">
+
+    <fragment
+        android:id="@+id/toDoListFragment"
+        android:name="com.peter.todo.ToDoListFragment"
+        android:label="ToDoListFragment">
+        <action
+            android:id="@+id/action_to_addFragment"
+            app:destination="@id/addTaskFragment"
+            >
+
+
+        <argument
+            android:name="action"
+            app:argType="string"
+            android:defaultValue="Add" />
+        </action>
+
+        <action
+            android:id="@+id/action_to_UpdateFragment"
+            app:destination="@id/updateTaskFragment"
+            >
+            <argument
+                android:name="action"
+                app:argType="string"
+                android:defaultValue="Update" />
+            <argument
+                android:name="todo"
+                app:argType="com.peter.todo.ToDoEntity"
+                />
+
+        </action>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.peter.todo.AddUpdateFragment"
+        android:label="Add Task"
+        >
+
+    </fragment>
+    <fragment
+        android:id="@+id/updateTaskFragment"
+        android:name="com.peter.todo.AddUpdateFragment"
+        android:label="Update Task"
+        >
+
+    </fragment>
+
+    <!-- Add other fragments and connections as needed -->
+
+</navigation>
