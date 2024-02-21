@@ -1,7 +1,8 @@
-package com.peter.todo.repository
+package com.peter.todo.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.peter.todo.repository.ToDoListRepository
 import com.peter.todo.viewmodel.ToDoListViewModel
 
 class ToDoListViewModelFactory(private val repository: ToDoListRepository) : ViewModelProvider.Factory {

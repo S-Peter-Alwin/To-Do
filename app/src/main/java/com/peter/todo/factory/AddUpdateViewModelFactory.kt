@@ -1,7 +1,8 @@
-package com.peter.todo.repository
+package com.peter.todo.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.peter.todo.repository.AddUpdateRepository
 import com.peter.todo.viewmodel.AddUpdateViewModel
 
 class AddUpdateViewModelFactory(private val repository: AddUpdateRepository) : ViewModelProvider.Factory {

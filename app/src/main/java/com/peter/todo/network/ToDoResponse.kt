@@ -1,4 +1,4 @@
-package com.peter.todo.api
+package com.peter.todo.network
 
 import com.peter.todo.db.ToDoEntity
 

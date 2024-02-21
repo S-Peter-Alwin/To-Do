@@ -7,39 +7,35 @@ import androidx.lifecycle.viewModelScope
 import com.peter.todo.repository.ToDoListRepository
 import com.peter.todo.db.ToDoEntity
 import kotlinx.coroutines.launch
- class ToDoListViewModel(private val repository: ToDoListRepository) : ViewModel() {
-     private var currentCount = 0
-     private val _loadingState = MutableLiveData<Boolean>()
-     val loadingState: LiveData<Boolean> get() = _loadingState
 
-     val allTasks: LiveData<List<ToDoEntity>> = repository.allTodoFromDB
+class ToDoListViewModel(private val repository: ToDoListRepository) : ViewModel() {
+    private var currentCount = 0
+    private val _loadingState = MutableLiveData<Boolean>()
+    val loadingState: LiveData<Boolean> get() = _loadingState
 
-     init {
-         _loadingState.value = false
-         fetchToDoList()
-     }
+    val allTasks: LiveData<List<ToDoEntity>> = repository.allTodoFromDB
 
-     fun fetchToDoList() {
-         viewModelScope.launch {
-             try {
-                 _loadingState.value = true
-                 repository.getTasks(currentCount)
+    init {
+        fetchToDoList()
+    }
 
-             } finally {
-                 _loadingState.value = false
-             }
+    fun fetchToDoList() {
+        viewModelScope.launch {
+            try {
+                _loadingState.value = true
+                repository.getTasks(currentCount)
+
+            } finally {
+                _loadingState.value = false
+            }
 
 
         }
     }
 
-     fun loadMore(count : Int){
-         currentCount = count
-         fetchToDoList()
-     }
+    fun loadMore(count : Int){
+        currentCount = count
+        fetchToDoList()
+    }
 
-
-
-
-
- }
+}

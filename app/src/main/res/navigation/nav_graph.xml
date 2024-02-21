@@ -30,7 +30,7 @@
                 android:defaultValue="Update" />
             <argument
                 android:name="todo"
-                app:argType="com.peter.todo.ToDoEntity"
+                app:argType="com.peter.todo.db.ToDoEntity"
                 />
 
         </action>

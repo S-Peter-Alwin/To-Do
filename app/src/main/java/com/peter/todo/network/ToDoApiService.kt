@@ -1,4 +1,4 @@
-package com.peter.todo.api
+package com.peter.todo.network
 
 import com.peter.todo.db.ToDoEntity
 import retrofit2.Response
@@ -13,7 +13,7 @@ import retrofit2.http.Query
 
 interface ToDoApiService {
     @GET("todos")
-    suspend fun getToDoList(@Query ("limit") limit:Int,@Query ("skip") skip:Int): ToDoResponse
+    suspend fun getToDoList(@Query ("limit") limit:Int,@Query ("skip") skip:Int):  ToDoResponse
 
     @POST("todos/add")
     @Headers("Content-Type: application/json")

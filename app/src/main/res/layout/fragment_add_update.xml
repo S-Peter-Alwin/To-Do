@@ -6,46 +6,59 @@
     tools:context=".ui.AddUpdateFragment"
     android:orientation="vertical"
     android:padding="15dp">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_todo_title"
+    <EditText
+        android:id="@+id/et_todo_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip">
+        android:layout_height="150dp"
+        android:background="@drawable/edittext_bg"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:gravity="start"
+        android:hint="Enter a task"
+        android:scrollbars="vertical"
+        android:singleLine="true"
+        android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/et_todo_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:hint="Enter a task"
-            android:singleLine="true"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/isCompleted"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:textSize="18sp"
+        android:buttonTint="@color/red"
         android:text="Completed"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addUpdate"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Add"
-        android:background="@color/teal_700"/>
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addUpdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/white"
+            android:background="@drawable/button_bg"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Delete"
-        android:background="@color/teal_200"
-        />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:text="Delete"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/white"
+            android:background="@drawable/button_bg"
+            />
+    </LinearLayout>
+
+
 
 </LinearLayout>

@@ -1,39 +1,18 @@
 package com.peter.todo.repository
 
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.util.Log
 import android.widget.Toast
-import com.peter.todo.api.ToDoApiService
+import com.peter.todo.network.ToDoApiService
 import com.peter.todo.db.ToDoEntity
 import com.peter.todo.db.TodoDao
+import com.peter.todo.util.NetworkUtils
 
 class AddUpdateRepository(private val taskApi: ToDoApiService, private val toDoDao: TodoDao, private val context: Context) {
 
-    fun isOnline(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val capabilities =
-            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        if (capabilities != null) {
-            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                return true
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                return true
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                return true
-            }
-        }
-        return false
-    }
-
+    val isOnline = NetworkUtils.isOnline(context)
     suspend fun deleteToDo(toDo: ToDoEntity)  : Result<ToDoEntity?> {
         return try {
-            if (isOnline(context)) {
+            if (isOnline) {
                 val response = taskApi.deleteTodo(toDo.id!!)
                 if (response.isSuccessful) {
                     // API call successful
@@ -57,7 +36,7 @@ class AddUpdateRepository(private val taskApi: ToDoApiService, private val toDoD
     }
     suspend fun updateToDo(toDo: ToDoEntity)  : Result<ToDoEntity?> {
         return try {
-            if (isOnline(context)) {
+            if (isOnline) {
                 val response = taskApi.updateToDo(toDo.id!!,toDo)
                 if (response.isSuccessful) {
                     // API call successful
@@ -83,7 +62,7 @@ class AddUpdateRepository(private val taskApi: ToDoApiService, private val toDoD
     suspend fun addToDo(toDo: ToDoEntity)
             : Result<ToDoEntity?> {
         return try {
-            if (isOnline(context)) {
+            if (isOnline) {
                 val response = taskApi.addTodo(toDo)
                 if (response.isSuccessful) {
                     // API call successful

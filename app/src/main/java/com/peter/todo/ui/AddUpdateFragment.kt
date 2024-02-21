@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.peter.todo.R
 import com.peter.todo.repository.AddUpdateRepository
 import com.peter.todo.viewmodel.AddUpdateViewModel
-import com.peter.todo.repository.AddUpdateViewModelFactory
-import com.peter.todo.api.TodoServices
+import com.peter.todo.factory.AddUpdateViewModelFactory
+import com.peter.todo.network.TodoServices
 import com.peter.todo.databinding.FragmentAddUpdateBinding
 import com.peter.todo.db.AppDatabase
 import com.peter.todo.db.ToDoEntity
@@ -31,10 +34,21 @@ class AddUpdateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddUpdateBinding.inflate(layoutInflater, container, false)
-        val toDoDao = AppDatabase.getInstance(requireContext()).todoDao()
-        val repository = AddUpdateRepository(TodoServices.taskApiService,toDoDao,requireContext())
-        viewModel = ViewModelProvider(this, AddUpdateViewModelFactory(repository)).get(
-            AddUpdateViewModel::class.java)
+        setUpViewModel()
+        setUpView()
+        return binding.root
+    }
+
+   fun setUpViewModel (){
+       val toDoDao = AppDatabase.getInstance(requireContext()).todoDao()
+       val repository = AddUpdateRepository(TodoServices.taskApiService,toDoDao,requireContext())
+       viewModel = ViewModelProvider(this, AddUpdateViewModelFactory(repository)).get(
+           AddUpdateViewModel::class.java)
+       viewModel.actionCompleteEvent.observe(viewLifecycleOwner, Observer {
+           findNavController().popBackStack()
+       })
+   }
+    fun setUpView(){
         val action = requireArguments().getString("action")
         if (action.equals("Add",true)){
             binding.addUpdate.setText("ADD")
@@ -43,7 +57,7 @@ class AddUpdateFragment : Fragment() {
         else if(action.equals("Update",true)){
             binding.addUpdate.setText("UPDATE")
             binding.delete.visibility = View.VISIBLE
-             data = requireArguments().getSerializable("todo") as ToDoEntity
+            data = requireArguments().getSerializable("todo") as ToDoEntity
             binding.etTodoTitle.setText(data.todo)
             binding.isCompleted.isChecked = data.completed
         }
@@ -66,16 +80,27 @@ class AddUpdateFragment : Fragment() {
 
         }
         binding.delete.setOnClickListener{
-            viewModel.delete(data)
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Delete")
+            builder.setMessage("Are you sure want to delete?")
+            builder.setPositiveButton("Yes"){dialogInterface, which ->
+                viewModel.delete(data)
+            }
+            builder.setNegativeButton("Cancel"){dialogInterface, which ->
+                dialogInterface.dismiss()
+            }
+            val alertDialog: AlertDialog = builder.create()
+
+            alertDialog.setCancelable(false)
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(requireContext(),R.color.red))
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(requireContext(),R.color.red));
+
+
+
         }
-        viewModel.actionCompleteEvent.observe(viewLifecycleOwner, Observer {
-            findNavController().popBackStack()
-        })
 
-        return binding.root
     }
-
-
 
 
 }
